@@ -1,7 +1,8 @@
-
+import java.awt.Color;
+import java.awt.Graphics;
 public class Snake {
 	public Point [] points = null;
-	public java.awt.Color color;
+	public Color color = Color.blue;
 	
 	public Snake (int length, int x, int y) {
 		if (length < 0) {
@@ -12,6 +13,10 @@ public class Snake {
 	}
 	public Snake (int x, int y) {
 		this(5, x, y);
+	}
+	void paint(Graphics g) {
+		g.setColor(color);
+		//TODO fehlt der Rest von e) ii) hab keine Lust mehr :)
 	}
 
 }
