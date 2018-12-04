@@ -16,7 +16,13 @@ public class Snake {
 	}
 	void paint(Graphics g) {
 		g.setColor(color);
-		//TODO fehlt der Rest von e) ii) hab keine Lust mehr :)
+		for (int i = 0; i < points.length; i++) {
+			if (points [i] == null) {
+				continue;
+			}else {
+				g.draw3DRect(getX(), getY(), width, height, raised); //komme nicht weiter 
+			}
+		}
 	}
 
 }

@@ -7,6 +7,7 @@ public class SnakeGame extends AudGameWindow {
 		SnakeGame one = new SnakeGame();
 		one.start();
 	}
+
 	public int width;
 	public int height;
 	public static final int SQUARE_SIZE = 16;
@@ -18,18 +19,19 @@ public class SnakeGame extends AudGameWindow {
 
 	@Override
 	public void paintGame(Graphics g) {
-		g.drawRect(0, 0,getGameAreaWidth(),getGameAreaHeight());
-		
+		g.fillRect(0, 0, getGameAreaWidth(), getGameAreaHeight());
+
 	}
 
 	@Override
 	public void handleInput(int keyCode) {
 
 	}
-	public SnakeGame () {
-		setTitle ("AuD-Snake - Score: 0");
-		this.width = getGameAreaWidth()/SQUARE_SIZE;
-		this.height = getGameAreaHeight ()/SQUARE_SIZE;
+
+	public SnakeGame() {
+		setTitle("AuD-Snake - Score: 0");
+		this.width = getGameAreaWidth() / SQUARE_SIZE;
+		this.height = getGameAreaHeight() / SQUARE_SIZE;
 	}
 
 }
