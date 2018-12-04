@@ -9,7 +9,7 @@ public class Snake {
 			throw new  IllegalArgumentException ("length muss eine positive Zahl sein");
 		}
 		Point start = new Point (x,y);
-		this.points [0] = start; 
+		this.points [0] = start; //Nullpointerexception beim ausführen??
 	}
 	public Snake (int x, int y) {
 		this(5, x, y);
