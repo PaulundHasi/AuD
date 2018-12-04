@@ -20,7 +20,7 @@ public class SnakeGame extends AudGameWindow {
 	@Override
 	public void paintGame(Graphics g) {
 		g.fillRect(0, 0, getGameAreaWidth(), getGameAreaHeight());
-
+		//Zeichnen der Schlange fehlt Aufgabe 4g)
 	}
 
 	@Override
@@ -32,6 +32,7 @@ public class SnakeGame extends AudGameWindow {
 		setTitle("AuD-Snake - Score: 0");
 		this.width = getGameAreaWidth() / SQUARE_SIZE;
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
+		Snake snakeFirst = new Snake(1, width / 2, height / 2);
 	}
 
 }
