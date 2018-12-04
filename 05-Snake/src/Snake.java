@@ -1,25 +1,31 @@
 import java.awt.Color;
 import java.awt.Graphics;
+
 public class Snake {
-	public Point [] points = null;
+	public Point[] points = null;
 	public Color color = Color.blue;
-	
-	public Snake (int length, int x, int y) {
+	public Graphics g;
+
+	public Snake(int length, int x, int y) {
 		if (length < 0) {
-			throw new  IllegalArgumentException ("length muss eine positive Zahl sein");
+			throw new IllegalArgumentException("length muss eine positive Zahl sein");
+		} else {
+			Point start = new Point(x, y);
+			this.points = new Point[length];
+			this.points[0] = start;
 		}
-		Point start = new Point (x,y);
-		this.points [0] = start; //Nullpointerexception beim ausführen??
 	}
-	public Snake (int x, int y) {
+
+	public Snake(int x, int y) {
 		this(5, x, y);
 	}
+
 	void paint(Graphics g) {
 		g.setColor(color);
 		for (int i = 0; i < points.length; i++) {
-			if (points [i] == null) {
+			if (points[i] == null) {
 				continue;
-			}else {
+			} else {
 				g.drawRect(points[i].getX(), points[i].getY(), SnakeGame.WIDTH, SnakeGame.HEIGHT);
 			}
 		}
