@@ -20,7 +20,7 @@ public class Snake {
 			if (points [i] == null) {
 				continue;
 			}else {
-				g.draw3DRect(getX(), getY(), width, height, raised); //komme nicht weiter 
+				g.drawRect(points[i].getX(), points[i].getY(), SnakeGame.WIDTH, SnakeGame.HEIGHT);
 			}
 		}
 	}
