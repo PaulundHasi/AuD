@@ -6,7 +6,7 @@ public class Snake {
 	
 	public Snake (int length, int x, int y) {
 		if (length < 0) {
-			throw new  IllegalArgumentException ("lenght muss eine positive Zahl sein");
+			throw new  IllegalArgumentException ("length muss eine positive Zahl sein");
 		}
 		Point start = new Point (x,y);
 		this.points [0] = start; 
