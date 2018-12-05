@@ -8,6 +8,8 @@ public class SnakeGame extends AudGameWindow {
 	public static final int SQUARE_SIZE = 16;
 	private int score = 0;
 	private Snake snake;
+	public static final int STEP_TIME = 100;
+	private long lastSnakeUpdate;
 
 	public SnakeGame() {
 		this.score = 0;
@@ -15,15 +17,20 @@ public class SnakeGame extends AudGameWindow {
 		this.width = getGameAreaWidth() / SQUARE_SIZE;
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
 		this.snake = new Snake(width / 2, height / 2, 1);
+		this.lastSnakeUpdate = System.currentTimeMillis();
 	}
 
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
+		one.snake.step();
 	}
 
 	@Override
 	public void updateGame(long time) {
+		for (int i = 0; i <= STEP_TIME; i++) {
+			
+		}
 	}
 
 	@Override

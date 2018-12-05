@@ -4,7 +4,8 @@ import java.awt.Graphics;
 public class Snake {
 	public Point[] points = null;
 	private Color color = Color.blue;
-	private Direction nextDirection = Direction.UP;
+	private Direction nextDirection = Direction.RIGHT;
+	private Direction lastDirection;
 
 	public Snake(int x, int y, int length) {
 		if (length < 0) {
