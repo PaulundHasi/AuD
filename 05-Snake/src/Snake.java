@@ -47,7 +47,19 @@ public class Snake {
 	public void step() {
 		Point help = new Point(points[0].getX(), points[0].getY());
 		System.arraycopy(points, 0, points, 1, points.length - 1);
-		
+		switch (nextDirection) {
+		case RIGHT:
+			points[0] = new Point(help.getX()+SnakeGame.SQUARE_SIZE, help.getY());
+			break;
+		case DOWN:
+			points[0] = new Point(help.getX(), help.getY()-SnakeGame.SQUARE_SIZE);
+			break;
+		case LEFT:
+			points[0] = new Point(help.getX()-SnakeGame.SQUARE_SIZE, help.getY());
+			break;
+		case UP:
+			points[0] = new Point(help.getX(), help.getY()-SnakeGame.SQUARE_SIZE);
+		}
 	}
 
 }
