@@ -20,13 +20,13 @@ public class Snake {
 		this(5, x, y);
 	}
 
-	void paint(Graphics g) {
+	public void paint(Graphics g) {
 		g.setColor(color);
 		for (int i = 0; i < points.length; i++) {
 			if (points[i] == null) {
 				continue;
 			} else {
-				g.drawRect(points[i].getX(), points[i].getY(), SnakeGame.WIDTH, SnakeGame.HEIGHT);
+				g.fillRect(points[i].getX(), points[i].getY(), SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
 			}
 		}
 	}
