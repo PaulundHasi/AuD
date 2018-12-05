@@ -1,11 +1,11 @@
 
-public class Point extends SnakeGame {
+public class Point {
 	private int x;
 	private int y;
 
 	public Point(int x, int y) {
-		this.x = x * SQUARE_SIZE;
-		this.y = y * SQUARE_SIZE;
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getX() {
