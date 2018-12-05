@@ -9,6 +9,14 @@ public class SnakeGame extends AudGameWindow {
 	private int score = 0;
 	private Snake snake;
 
+	public SnakeGame() {
+		this.score = 0;
+		setTitle("AuD-Snake - Score: " + score);
+		this.width = getGameAreaWidth() / SQUARE_SIZE;
+		this.height = getGameAreaHeight() / SQUARE_SIZE;
+		this.snake = new Snake(width / 2, height / 2, 1);
+	}
+
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
@@ -29,11 +37,4 @@ public class SnakeGame extends AudGameWindow {
 
 	}
 
-	public SnakeGame() {
-		this.score = 0;
-		this.setTitle("AuD-Snake - Score: " + score);
-		this.width = getGameAreaWidth() / SQUARE_SIZE;
-		this.height = getGameAreaHeight() / SQUARE_SIZE;
-		this.snake = new Snake(width/2*SQUARE_SIZE, height/2*SQUARE_SIZE, 1);
-	}
 }
