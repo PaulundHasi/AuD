@@ -1,20 +1,13 @@
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Color;
 
 public class SnakeGame extends AudGameWindow {
 
 	private int width;
-	private int heigth;
+	private int height;
 	public static final int SQUARE_SIZE = 16;
 	private int score = 0;
-	public Snake snake;
-
-	public SnakeGame() {
-		setTitle("AuD-Snake - Score: " + score);
-		this.width = getGameAreaWidth() / SQUARE_SIZE;
-		this.heigth = getGameAreaHeight() / SQUARE_SIZE;
-		this.snake = new Snake(width / 2, heigth / 1);
-	}
+	private Snake snake;
 
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
@@ -27,12 +20,20 @@ public class SnakeGame extends AudGameWindow {
 
 	@Override
 	public void paintGame(Graphics g) {
-		g.drawRect(0, 0, getGameAreaWidth(), getGameAreaHeight());
+		g.fillRect(0, 0, getGameAreaWidth(), getGameAreaHeight());
 		snake.paint(g);
 	}
 
 	@Override
 	public void handleInput(int keycode) {
 
+	}
+
+	public SnakeGame() {
+		this.score = 0;
+		this.setTitle("AuD-Snake - Score: " + score);
+		this.width = getGameAreaWidth() / SQUARE_SIZE;
+		this.height = getGameAreaHeight() / SQUARE_SIZE;
+		this.snake = new Snake(width/2*SQUARE_SIZE, height/2*SQUARE_SIZE, 1);
 	}
 }
