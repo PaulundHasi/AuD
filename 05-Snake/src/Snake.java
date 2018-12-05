@@ -4,8 +4,7 @@ import java.awt.Graphics;
 public class Snake {
 	public Point[] points = null;
 	private Color color = Color.blue;
-	public Graphics g;
-	private Direction nextDirection;
+	private Direction nextDirection = Direction.UP;
 
 	public Snake(int length, int x, int y) {
 		if (length < 0) {
@@ -27,12 +26,28 @@ public class Snake {
 			if (points[i] == null) {
 				continue;
 			} else {
-				g.fillRect(points[i].getX(), points[i].getY(), SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
+				g.fillRect((points[i].getX()) * SnakeGame.SQUARE_SIZE, points[i].getY() * SnakeGame.SQUARE_SIZE,
+						SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
 			}
 		}
 	}
-	public enum Direction{
+
+	public enum Direction {
 		RIGHT, DOWN, LEFT, UP
+	}
+
+	public void setnextDirection(Direction direction) {
+		this.nextDirection = direction;
+	}
+
+	public Direction getnextDirection() {
+		return nextDirection;
+	}
+
+	public void step() {
+		Point help = new Point(points[0].getX(), points[0].getY());
+		System.arraycopy(points, 0, points, 1, points.length - 1);
+		
 	}
 
 }
