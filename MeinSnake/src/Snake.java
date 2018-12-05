@@ -47,16 +47,16 @@ public class Snake {
 		System.arraycopy(points, 0, points, 1, points.length-1);
 		switch (nextDirection) {
 		case RIGHT:
-			points[0] = new Point(help.getX()+SnakeGame.SQUARE_SIZE, help.getY());
+			points[0] = new Point(help.getX()+1, help.getY());
 			break;
 		case DOWN:
-			points[0] = new Point(help.getX(), help.getY()-SnakeGame.SQUARE_SIZE);
+			points[0] = new Point(help.getX(), help.getY()-1);
 			break;
 		case LEFT:
-			points[0] = new Point(help.getX()-SnakeGame.SQUARE_SIZE, help.getY());
+			points[0] = new Point(help.getX()-1, help.getY());
 			break;
 		case UP:
-			points[0] = new Point(help.getX(), help.getY()-SnakeGame.SQUARE_SIZE);
+			points[0] = new Point(help.getX(), help.getY()-1);
 		}
 	}
 

@@ -27,10 +27,11 @@ public class SnakeGame extends AudGameWindow {
 
 	@Override
 	public void updateGame(long time) {
-	for (int i = 0; i <= (time-lastSnakeUpdate);i++) {
+	/*for (int i = 0; i <= (time-lastSnakeUpdate);i++) {
 		if (System.currentTimeMillis() == STEP_TIME)
+		lastSnakeUpdate = lastSnakeUpdate + STEP_TIME;
+		}*/
 	}
-	lastSnakeUpdate = lastSnakeUpdate + STEP_TIME;
 	@Override
 	public void paintGame(Graphics g) {
 		g.fillRect(0, 0, getGameAreaWidth(), getGameAreaHeight());

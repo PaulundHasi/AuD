@@ -7,7 +7,7 @@ public class SnakeGame extends AudGameWindow {
 	private int height;
 	public static final int SQUARE_SIZE = 16;
 	private int score = 0;
-	private Snake snake;
+	private static Snake snake;
 	public static final int STEP_TIME = 100;
 	private long lastSnakeUpdate;
 
@@ -23,13 +23,17 @@ public class SnakeGame extends AudGameWindow {
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
-		one.snake.step();
+		snake.step();
 	}
 
 	@Override
 	public void updateGame(long time) {
-		for (int i = 0; i <= STEP_TIME; i++) {
-			
+		lastSnakeUpdate = (time + lastSnakeUpdate)/STEP_TIME;
+		int i = 0;
+		while (i < lastSnakeUpdate) {
+			snake.step();
+			this.lastSnakeUpdate += STEP_TIME;
+			i++;
 		}
 	}
 
