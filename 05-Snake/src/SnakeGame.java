@@ -22,15 +22,17 @@ public class SnakeGame extends AudGameWindow {
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
-		snake.step();
+		
 	}
 
 	@Override
 	public void updateGame(long time) {
-	/*for (int i = 0; i <= (time-lastSnakeUpdate);i++) {
-		if (System.currentTimeMillis() == STEP_TIME)
-		lastSnakeUpdate = lastSnakeUpdate + STEP_TIME;
-		}*/
+		long timeSteps = time - lastSnakeUpdate;
+		int steps = (int) (timeSteps / STEP_TIME);
+		for (int i = 0; i <= steps ;i++) {
+		snake.step();
+		}
+		lastSnakeUpdate += STEP_TIME;
 	}
 	@Override
 	public void paintGame(Graphics g) {

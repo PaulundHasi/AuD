@@ -23,7 +23,7 @@ public class SnakeGame extends AudGameWindow {
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
-		snake.step();
+		//snake.step();
 	}
 
 	@Override
