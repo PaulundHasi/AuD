@@ -9,6 +9,6 @@ public class Brick extends GameItem{
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.darkGray);
-		g.drawRect(getPosition().getX(), getPosition().getY(), SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
+		g.fillRect(getPosition().getX(), getPosition().getY(), SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
 	}
 }

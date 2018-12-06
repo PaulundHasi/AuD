@@ -11,6 +11,7 @@ public class SnakeGame extends AudGameWindow {
 	private static Snake snake;
 	public static final int STEP_TIME = 100;
 	private long lastSnakeUpdate;
+	private Point[] wall;
 
 	public SnakeGame() {
 		this.score = 0;
