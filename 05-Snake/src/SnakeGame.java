@@ -1,4 +1,7 @@
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
+
 
 public class SnakeGame extends AudGameWindow {
 
@@ -6,8 +9,8 @@ public class SnakeGame extends AudGameWindow {
 	private int height;
 	private int score;
 	public static final int SQUARE_SIZE = 16;
-	private static Snake snake;
-	public static final int STEP_TIME = 100;
+	private  Snake snake;
+	public static final int STEP_TIME = 90;
 	private long lastSnakeUpdate;
 
 	public SnakeGame() {
@@ -15,7 +18,7 @@ public class SnakeGame extends AudGameWindow {
 		setTitle("AuD-Snake - Score: " + score);
 		this.width = getGameAreaWidth() / SQUARE_SIZE;
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
-		this.snake = new Snake(1, width /2, height / 2);
+		this.snake = new Snake(4, width /2, height / 2);
 		this.lastSnakeUpdate = System.currentTimeMillis();
 	}
 
@@ -31,8 +34,9 @@ public class SnakeGame extends AudGameWindow {
 		int steps = (int) (timeSteps / STEP_TIME);
 		for (int i = 0; i <= steps ;i++) {
 		snake.step();
-		}
 		lastSnakeUpdate += STEP_TIME;
+		}
+		
 	}
 	@Override
 	public void paintGame(Graphics g) {
@@ -42,7 +46,20 @@ public class SnakeGame extends AudGameWindow {
 
 	@Override
 	public void handleInput(int keyCode) {
-
+		switch (keyCode) {
+		case KeyEvent.VK_RIGHT:
+			snake.setnextDirection(Snake.Direction.RIGHT);
+			break;
+		case KeyEvent.VK_DOWN:
+			snake.setnextDirection(Snake.Direction.DOWN);
+			break;
+		case KeyEvent.VK_LEFT:
+			snake.setnextDirection(Snake.Direction.LEFT);
+			break;
+		case KeyEvent.VK_UP:
+			snake.setnextDirection(Snake.Direction.UP);
+			break;
+		}
 	}
 
 }
