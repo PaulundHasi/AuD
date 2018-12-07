@@ -10,6 +10,5 @@ abstract public class GameItem {
 		return this.position;
 	}
 	
-	public abstract void paint (Graphics g); 
-		
+	public abstract void paint (Graphics g);
 }

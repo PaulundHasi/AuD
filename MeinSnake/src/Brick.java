@@ -10,5 +10,6 @@ public class Brick extends GameItem{
 	public void paint(Graphics g) {
 		g.setColor(Color.darkGray);
 		g.fillRect(getPosition().getX(), getPosition().getY(), SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
+		
 	}
 }
