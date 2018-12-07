@@ -5,6 +5,7 @@ public class Snake {
 	public Point[] points = null;
 	private Color color = Color.blue;
 	private Direction nextDirection = Direction.UP;
+	private Direction lastDirection;
 
 	public Snake(int length, int x, int y) {
 		if (length < 0) {
@@ -37,7 +38,11 @@ public class Snake {
 	}
 
 	public void setnextDirection(Direction direction) {
+		if ((direction == Direction.RIGHT && lastDirection == Direction.LEFT)|| (direction == Direction.UP && lastDirection == Direction.DOWN)||(direction == Direction.LEFT && lastDirection == Direction.RIGHT)||(direction == Direction.DOWN && lastDirection == Direction.UP)) {
+			nextDirection = lastDirection;
+		}else {
 		this.nextDirection = direction;
+		}
 	}
 
 	public Direction getnextDirection() {
@@ -49,16 +54,21 @@ public class Snake {
 		System.arraycopy(points, 0, points, 1, points.length - 1);
 		switch (nextDirection) {
 		case RIGHT:
-			points[0] = new Point(help.getX()+SnakeGame.SQUARE_SIZE, help.getY());
+			points[0] = new Point(help.getX()+1, help.getY());
+			lastDirection = Direction.RIGHT;
 			break;
 		case DOWN:
-			points[0] = new Point(help.getX(), help.getY()-SnakeGame.SQUARE_SIZE);
+			points[0] = new Point(help.getX(), help.getY()+1);
+			lastDirection = Direction.DOWN;
 			break;
 		case LEFT:
-			points[0] = new Point(help.getX()-SnakeGame.SQUARE_SIZE, help.getY());
+			points[0] = new Point(help.getX()-1, help.getY());
+			lastDirection = Direction.LEFT;
 			break;
 		case UP:
-			points[0] = new Point(help.getX(), help.getY()-SnakeGame.SQUARE_SIZE);
+			points[0] = new Point(help.getX(), help.getY()-1);
+			lastDirection = Direction.UP;
+			break;
 		}
 	}
 

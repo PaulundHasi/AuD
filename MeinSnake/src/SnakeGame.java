@@ -25,6 +25,10 @@ public class SnakeGame extends AudGameWindow {
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
+<<<<<<< HEAD
+=======
+		//snake.step();
+>>>>>>> branch 'master' of https://github.com/PaulundHasi/AuD.git
 	}
 
 	@Override
