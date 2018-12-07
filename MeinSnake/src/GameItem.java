@@ -7,8 +7,9 @@ abstract public class GameItem {
 		this.position = new Point(x, y);
 	}
 	public Point getPosition() {
-		return this.position;
+		return position;
 	}
 	
 	public abstract void paint (Graphics g);
+	
 }

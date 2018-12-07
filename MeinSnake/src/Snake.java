@@ -76,4 +76,11 @@ public class Snake {
 		}
 	}
 
+	public boolean collidesWith(GameItem item) {
+		
+	}
+
+	public boolean collidesWith(int x, int y) {
+
+	}
 }

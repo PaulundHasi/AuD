@@ -11,7 +11,7 @@ public class SnakeGame extends AudGameWindow {
 	private static Snake snake;
 	public static final int STEP_TIME = 100;
 	private long lastSnakeUpdate;
-	private Point[] wall;
+	private Brick[] wall;
 
 	public SnakeGame() {
 		this.score = 0;
@@ -20,18 +20,28 @@ public class SnakeGame extends AudGameWindow {
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
 		this.snake = new Snake(width / 2, height / 2, 5);
 		this.lastSnakeUpdate = System.currentTimeMillis();
+		this.wall = new Brick[((2* width)+(2* height))-4];
+		int anzahl = 0;
+		for (int i = 0; i < width; i++) {
+			wall[anzahl++] = new Brick(i, 0);
+			wall[anzahl++] = new Brick(i, height-1);
+		}
+		for (int a = 1; a < height-1; a++) {
+			wall[anzahl++] = new Brick(0, a);
+			wall[anzahl++] = new Brick(width-1, a);
+		}
 	}
 
 	public static void main(String[] args) {
 		SnakeGame one = new SnakeGame();
 		one.start();
-		//snake.step();
+		// snake.step();
 	}
 
 	@Override
 	public void updateGame(long time) {
 		long stepTime = (time - lastSnakeUpdate);
-		int step = (int) (stepTime/ STEP_TIME);
+		int step = (int) (stepTime / STEP_TIME);
 		for (int i = 0; i < step; i++) {
 			snake.step();
 			this.lastSnakeUpdate += STEP_TIME;
@@ -41,6 +51,9 @@ public class SnakeGame extends AudGameWindow {
 	@Override
 	public void paintGame(Graphics g) {
 		g.fillRect(0, 0, getGameAreaWidth(), getGameAreaHeight());
+		for (int i = 0; i < wall.length; i++) {
+			wall[i].paint(g);
+		}
 		snake.paint(g);
 	}
 
