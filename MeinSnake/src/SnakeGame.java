@@ -4,15 +4,18 @@ import java.awt.event.KeyEvent;
 
 public class SnakeGame extends AudGameWindow {
 
+	// Attribute:
 	private int width;
 	private int height;
 	public static final int SQUARE_SIZE = 16;
 	private int score = 0;
-	private static Snake snake;
+	private Snake snake;
 	public static final int STEP_TIME = 100;
 	private long lastSnakeUpdate;
 	private Brick[] wall;
+	public static SnakeGame game = new SnakeGame();
 
+	// Konstruktor:
 	public SnakeGame() {
 		this.score = 0;
 		setTitle("AuD-Snake - Score: " + score);
@@ -20,21 +23,21 @@ public class SnakeGame extends AudGameWindow {
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
 		this.snake = new Snake(width / 2, height / 2, 5);
 		this.lastSnakeUpdate = System.currentTimeMillis();
-		this.wall = new Brick[((2* width)+(2* height))-4];
+		this.wall = new Brick[((2 * width) + (2 * height)) - 4];
 		int anzahl = 0;
 		for (int i = 0; i < width; i++) {
 			wall[anzahl++] = new Brick(i, 0);
-			wall[anzahl++] = new Brick(i, height-1);
+			wall[anzahl++] = new Brick(i, height - 1);
 		}
-		for (int a = 1; a < height-1; a++) {
+		for (int a = 1; a < height - 1; a++) {
 			wall[anzahl++] = new Brick(0, a);
-			wall[anzahl++] = new Brick(width-1, a);
+			wall[anzahl++] = new Brick(width - 1, a);
 		}
 	}
 
+	// Main-Methode:
 	public static void main(String[] args) {
-		SnakeGame one = new SnakeGame();
-		one.start();
+		game.start();
 
 	}
 
@@ -44,6 +47,7 @@ public class SnakeGame extends AudGameWindow {
 		int step = (int) (stepTime / STEP_TIME);
 		for (int i = 0; i < step; i++) {
 			snake.step();
+			checkCollisions();
 			this.lastSnakeUpdate += STEP_TIME;
 		}
 	}
@@ -73,6 +77,18 @@ public class SnakeGame extends AudGameWindow {
 			snake.setNextDirection(Snake.Direction.UP);
 			break;
 		}
+	}
+
+	@SuppressWarnings("static-access")
+	private void checkCollisions() {
+		for (int i = 0; i < wall.length; i++)
+			if (snake.collidesWith(wall[i]) == true) {
+				stop();
+				javax.swing.JOptionPane.showMessageDialog(this.game, "You died! Score: " + score);
+				break;
+			} else if (snake.collidesWith(wall[i]) == false) {
+				continue;
+			}
 	}
 
 }
