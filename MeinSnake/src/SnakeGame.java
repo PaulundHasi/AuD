@@ -21,7 +21,7 @@ public class SnakeGame extends AudGameWindow {
 		setTitle("AuD-Snake - Score: " + score);
 		this.width = getGameAreaWidth() / SQUARE_SIZE;
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
-		this.snake = new Snake(width / 2, height / 2, 5);
+		this.snake = new Snake(width / 2, height / 2, 20);
 		this.lastSnakeUpdate = System.currentTimeMillis();
 		this.wall = new Brick[((2 * width) + (2 * height)) - 4];
 		int anzahl = 0;
@@ -82,7 +82,7 @@ public class SnakeGame extends AudGameWindow {
 	@SuppressWarnings("static-access")
 	private void checkCollisions() {
 		for (int i = 0; i < wall.length; i++)
-			if (snake.collidesWith(wall[i]) == true) {
+			if (snake.collidesWith(wall[i]) == true || snake.collidesWithSelf() == true) {
 				stop();
 				javax.swing.JOptionPane.showMessageDialog(this.game, "You died! Score: " + score);
 				break;

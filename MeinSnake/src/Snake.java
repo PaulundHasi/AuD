@@ -7,6 +7,7 @@ public class Snake {
 	private Direction nextDirection = Direction.UP;
 	private Direction lastDirection;
 
+	//Konstruktor(Mit Eingabe):
 	public Snake(int x, int y, int length) {
 		if (length < 0) {
 			throw new IllegalArgumentException("length muss eine positive Zahl sein!");
@@ -17,6 +18,7 @@ public class Snake {
 
 	}
 
+	//Konstrukruktor(ohne Eingabe):
 	public Snake(int x, int y) {
 		this(x, y, 5);
 	}
@@ -88,5 +90,19 @@ public class Snake {
 				b = false;
 			}
 		return b;
+	}
+	
+	public boolean collidesWithSelf() {
+		boolean a = false;
+		for (int i = 1; i < points.length; i++) {
+			if(this.points[0].equals(this.points[i])) {
+				a = true;
+				break;
+			}else {
+				a = false;
+				continue;
+			}
+		}
+		return a;
 	}
 }
