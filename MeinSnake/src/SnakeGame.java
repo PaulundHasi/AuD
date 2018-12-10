@@ -104,9 +104,10 @@ public class SnakeGame extends AudGameWindow {
 		int y = (int) (Math.random() * height);
 		this.apple = new Apple(x, y);
 			if (snake.collidesWith(this.apple.getPosition().getX(), this.apple.getPosition().getY()) == true) {
-				while (x == snake.points[i].getX() && y == snake.points[i].getY()) {
-					x = (int) (Math.random() * SQUARE_SIZE);
-					y = (int) (Math.random() * SQUARE_SIZE);
+				while (snake.collidesWith(this.apple.getPosition().getX(), this.apple.getPosition().getY()) == true) {
+					x = (int) (Math.random() * width);
+					y = (int) (Math.random() * height);
+					this.apple = new Apple(x, y);
 			}
 		}
 	}
