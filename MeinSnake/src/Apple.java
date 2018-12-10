@@ -3,11 +3,11 @@ import java.awt.Color;
 
 public class Apple extends GameItem {
 	private static int nextValue = 1;
-	private int value = 0;
+	private final int value;
 
 	public Apple(int x, int y) {
 		super(x, y);
-		final int value = this.value + nextValue;
+		value = nextValue++;
 	}
 
 	@Override

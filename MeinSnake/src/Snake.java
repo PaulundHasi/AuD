@@ -2,12 +2,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Snake {
-	public Point[] points = null;
-	private Color color = Color.blue;
+	public Color color = Color.blue;
+	private Point[] points = null;
 	private Direction nextDirection = Direction.UP;
 	private Direction lastDirection;
 
-	//Konstruktor(Mit Eingabe):
+	// Konstruktor(Mit Eingabe):
 	public Snake(int x, int y, int length) {
 		if (length < 0) {
 			throw new IllegalArgumentException("length muss eine positive Zahl sein!");
@@ -18,7 +18,7 @@ public class Snake {
 
 	}
 
-	//Konstrukruktor(ohne Eingabe):
+	// Konstrukruktor(ohne Eingabe):
 	public Snake(int x, int y) {
 		this(x, y, 5);
 	}
@@ -84,25 +84,37 @@ public class Snake {
 
 	public boolean collidesWith(int x, int y) {
 		boolean b = false;
-			if (points[0].getX() == x && points[0].getY() == y) {
-				b = true;
-			}else {
-				b = false;
-			}
+		if (points[0].getX() == x && points[0].getY() == y) {
+			b = true;
+		} else {
+			b = false;
+		}
 		return b;
 	}
-	
+
 	public boolean collidesWithSelf() {
 		boolean a = false;
 		for (int i = 1; i < points.length; i++) {
-			if(points[0].getX() == points[i].getX() && points[0].getY() == points[i].getY()) {
-				a = true;
-				break;
-			}else {
-				a = false;
-				continue;
+			if (points[i] != null) {
+				if (points[0].getX() == points[i].getX() && points[0].getY() == points[i].getY()) {
+					a = true;
+					break;
+				} else {
+					a = false;
+					continue;
+				}
 			}
 		}
 		return a;
+	}
+	
+	public void grow(int amount) {
+		if (amount < 1) {
+			throw new IllegalArgumentException("amount muss eine positive Zahl sein!"); 
+		}else {
+			Point[] help = System.arraycopy(points, 0, help, 1, points.length + amount);
+			help[0] = this.points[0];
+			this.points = help;
+		}
 	}
 }
