@@ -76,11 +76,17 @@ public class Snake {
 	}
 
 	public boolean collidesWith(GameItem item) {
-
+		
 	}
 
 	public boolean collidesWith(int x, int y) {
-
+		for (int i = 0; i < points.length;i++) {
+			if (points[i].getX() == x && points[i].getY() == y) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 }
