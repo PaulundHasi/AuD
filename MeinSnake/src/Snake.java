@@ -95,7 +95,7 @@ public class Snake {
 	public boolean collidesWithSelf() {
 		boolean a = false;
 		for (int i = 1; i < points.length; i++) {
-			if(this.points[0].equals(this.points[i])) {
+			if(points[0].getX() == points[i].getX() && points[0].getY() == points[i].getY()) {
 				a = true;
 				break;
 			}else {

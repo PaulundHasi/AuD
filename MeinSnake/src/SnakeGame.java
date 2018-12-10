@@ -14,6 +14,7 @@ public class SnakeGame extends AudGameWindow {
 	private long lastSnakeUpdate;
 	private Brick[] wall;
 	public static SnakeGame game = new SnakeGame();
+	public Apple apple;
 
 	// Konstruktor:
 	public SnakeGame() {
@@ -38,6 +39,7 @@ public class SnakeGame extends AudGameWindow {
 	// Main-Methode:
 	public static void main(String[] args) {
 		game.start();
+		game.createNewApple();
 
 	}
 
@@ -47,7 +49,7 @@ public class SnakeGame extends AudGameWindow {
 		int step = (int) (stepTime / STEP_TIME);
 		for (int i = 0; i < step; i++) {
 			snake.step();
-			checkCollisions();
+			//checkCollisions();
 			this.lastSnakeUpdate += STEP_TIME;
 		}
 	}
@@ -58,6 +60,8 @@ public class SnakeGame extends AudGameWindow {
 		for (int i = 0; i < wall.length; i++) {
 			wall[i].paint(g);
 		}
+		Apple a = new Apple(14, 16);
+		a.paint(g);
 		snake.paint(g);
 	}
 
@@ -82,13 +86,28 @@ public class SnakeGame extends AudGameWindow {
 	@SuppressWarnings("static-access")
 	private void checkCollisions() {
 		for (int i = 0; i < wall.length; i++)
-			if (snake.collidesWith(wall[i]) == true || snake.collidesWithSelf() == true) {
+			if (snake.collidesWith(wall[i]) == true) {
 				stop();
 				javax.swing.JOptionPane.showMessageDialog(this.game, "You died! Score: " + score);
 				break;
-			} else if (snake.collidesWith(wall[i]) == false) {
+			} else if (snake.collidesWithSelf() == true) {
+				stop();
+				javax.swing.JOptionPane.showMessageDialog(this.game, "You died! Score: " + score);
+				break;
+			}else {
 				continue;
 			}
+	}
+	private void createNewApple() {
+		int x = (int) (Math.random()*width);
+		int y = (int) (Math.random()*height);
+		for (int i = 0; i < snake.points.length; i++) {
+			while (x == snake.points[i].getX() && y == snake.points[i].getY()) {
+				x = (int) (Math.random()*SQUARE_SIZE);
+				y = (int) (Math.random()*SQUARE_SIZE);
+			}
+		}
+		this.apple = new Apple(x, y);
 	}
 
 }
