@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Snake {
-	public Point[] points = null;
+	private Point[] points = null;
 	private Color color = Color.blue;
 	private Direction nextDirection = Direction.UP;
 	private Direction lastDirection;
@@ -76,16 +76,42 @@ public class Snake {
 	}
 
 	public boolean collidesWith(GameItem item) {
-		
+		return collidesWith(item.getPosition().getX(), item.getPosition().getY());
 	}
 
 	public boolean collidesWith(int x, int y) {
-		for (int i = 0; i < points.length;i++) {
-			if (points[i].getX() == x && points[i].getY() == y) {
-				return true;
-			} else {
-				return false;
+		if (points[0].getX() == x && points[0].getY() == y) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean collidesWithSelf() {
+		boolean help = false;
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] != null) {
+				if (points[0].getX() == points[i].getX() && points[0].getY() == points[i].getY()) {
+					help = true;
+					break;
+				} else {
+					help = false;
+					continue;
+				}
+
 			}
+
+		}
+		return help;
+	}
+
+	public void grow(int amount) {
+		if (amount < 1) {
+			throw new IllegalArgumentException("amount muss eine positive Zahl sein");
+		} else {
+			Point[] help = new Point[points.length + amount];
+			System.arraycopy(points, 0, help, 0, points.length);
+			amount++;
 		}
 	}
 
