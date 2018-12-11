@@ -23,7 +23,7 @@ public class SnakeGame extends AudGameWindow {
 		setTitle("AuD-Snake - Score: " + score);
 		this.width = getGameAreaWidth() / SQUARE_SIZE;
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
-		this.snake = new Snake(width / 2, height / 2, 20);
+		this.snake = new Snake(width / 2, height / 2, 5);
 		this.lastSnakeUpdate = System.currentTimeMillis();
 		this.wall = new Brick[((2 * width) + (2 * height)) - 4];
 		int anzahl = 0;
@@ -94,6 +94,11 @@ public class SnakeGame extends AudGameWindow {
 				stop();
 				javax.swing.JOptionPane.showMessageDialog(this, "You died! Score: " + score);
 				break;
+			} else if (snake.collidesWith(this.apple) == true) {
+				snake.grow(5);
+				createNewApple();
+				this.score += this.apple.getValue();
+				setTitle("AuD-Snake - Score: " + score);
 			} else {
 				continue;
 			}
@@ -103,11 +108,18 @@ public class SnakeGame extends AudGameWindow {
 		int x = (int) (Math.random() * width);
 		int y = (int) (Math.random() * height);
 		this.apple = new Apple(x, y);
-			if (snake.collidesWith(this.apple.getPosition().getX(), this.apple.getPosition().getY()) == true) {
-				while (snake.collidesWith(this.apple.getPosition().getX(), this.apple.getPosition().getY()) == true) {
-					x = (int) (Math.random() * width);
-					y = (int) (Math.random() * height);
-					this.apple = new Apple(x, y);
+		for (int i = 0; i < this.wall.length; i++) {
+			if (wall[i] != null) {
+				if (snake.collidesWith(this.apple) == true
+						&& (wall[i].getPosition().getX() == x && wall[i].getPosition().getY() == y)) {
+					while (snake.collidesWith(this.apple) == true && snake.collidesWith(wall[i]) == true
+							&& (wall[i].getPosition().getX() == x && wall[i].getPosition().getY() == y)) {
+						x = (int) (Math.random() * width);
+						y = (int) (Math.random() * height);
+						this.apple = new Apple(x, y);
+					}
+
+				}
 			}
 		}
 	}

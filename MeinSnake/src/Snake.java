@@ -86,10 +86,19 @@ public class Snake {
 		boolean b = false;
 		if (points[0].getX() == x && points[0].getY() == y) {
 			b = true;
-		} else {
-			b = false;
+		}else {
+		for (int i = 1; i < points.length; i++) {
+			if (points[i] != null) {
+				if (points[i].getX() == x && points[i].getY() == y) {
+					b = true;
+				} else {
+					b = false;
+				}
+			}
+		}
 		}
 		return b;
+
 	}
 
 	public boolean collidesWithSelf() {
@@ -107,14 +116,20 @@ public class Snake {
 		}
 		return a;
 	}
-	
+
 	public void grow(int amount) {
 		if (amount < 1) {
-			throw new IllegalArgumentException("amount muss eine positive Zahl sein!"); 
-		}else {
-			Point[] help = System.arraycopy(points, 0, help, 1, points.length + amount);
-			help[0] = this.points[0];
-			this.points = help;
+			throw new IllegalArgumentException("amount muss eine positive Zahl sein!");
+		} else {
+			Point[] help = new Point[points.length+amount];
+			help [0] = new Point(points[0].getX(), points[0].getY());
+			help[help.length-1] = new Point(points[points.length-1].getX(), points[points.length-1].getY());
+			//System.arraycopy(points, 0, help, 0, help.length);
+			//points [0] = new Point(help[0].getX(), help[0].getY());
+			/*Point[] help = new Point[points.length+amount+1];
+			help = this.points.substring(0);
+			System.arraycopy(points, 0, help, 0, (points.length)+amount);
+			this.points = help;*/
 		}
 	}
 }
