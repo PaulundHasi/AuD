@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 public class Apple extends GameItem {
-	private final int value ;
+	private final int value;
 	private static int nextValue = 0;
 
 	public Apple(int x, int y) {
