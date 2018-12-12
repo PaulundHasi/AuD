@@ -3,15 +3,15 @@ import java.awt.event.KeyEvent;
 
 public class SnakeGame extends AudGameWindow {
 
+	public static final int SQUARE_SIZE = 16;
+	public static final int STEP_TIME = 130;
+	public static final int GROW_AMOUNT = 1;
 	private int width;
 	private int height;
-	private int score;
-	public static final int SQUARE_SIZE = 16;
-	private Snake snake;
-	public static final int STEP_TIME = 90;
 	private long lastSnakeUpdate;
+	private int score;
+	private Snake snake;
 	private Brick[] wall;
-	public static final int GROW_AMOUNT = 1;
 	private Apple apple;
 
 	public SnakeGame() {
@@ -19,26 +19,19 @@ public class SnakeGame extends AudGameWindow {
 		setTitle("AuD-Snake - Score: " + score);
 		this.width = getGameAreaWidth() / SQUARE_SIZE;
 		this.height = getGameAreaHeight() / SQUARE_SIZE;
-		this.snake = new Snake(4, width / 2, height / 2);
+		this.snake = new Snake(width / 2, height / 2, 5);
 		this.lastSnakeUpdate = System.currentTimeMillis();
 		this.wall = new Brick[(width * 2 + height * 2) - 4];
 		int amountBricks = 0;
 		for (int i = 0; i < width; i++) {
 			wall[amountBricks++] = new Brick(i, 0);
 			wall[amountBricks++] = new Brick(i, height - 1);
-
 		}
 		for (int i = 1; i < height - 1; i++) {
 			wall[amountBricks++] = new Brick(0, i);
 			wall[amountBricks++] = new Brick(width - 1, i);
 		}
 		createNewApple();
-
-	}
-
-	public static void main(String[] args) {
-		SnakeGame one = new SnakeGame();
-		one.start();
 
 	}
 
@@ -61,6 +54,7 @@ public class SnakeGame extends AudGameWindow {
 		for (int i = 0; i < wall.length; i++) {
 			wall[i].paint(g);
 		}
+		apple.paint(g);
 	}
 
 	@Override
@@ -91,8 +85,11 @@ public class SnakeGame extends AudGameWindow {
 				stop();
 				javax.swing.JOptionPane.showMessageDialog(this, "You Died! Score: " + score);
 				break;
-			}else if (snake.collidesWith(this.apple)){
+			} else if (snake.collidesWith(this.apple) == true) {
 				snake.grow(GROW_AMOUNT);
+				createNewApple();
+				score = score + apple.getValue();
+				setTitle("AuD-Snake - Score: " + score);
 			} else {
 				continue;
 			}
@@ -100,14 +97,22 @@ public class SnakeGame extends AudGameWindow {
 	}
 
 	private void createNewApple() {
-		int x = (int) (Math.random() * width);
-		int y = (int) (Math.random() * height);
-		for (int i = 0; i < snake.points.length; i++) {
-			while (snake.points[i].getX() == x && snake.points[i].getY() == y) {
-				x = (int) (Math.random() * width);
-				y = (int) (Math.random() * height);
+		int x = (int) ((Math.random() * (width - 2)) + 1);
+		int y = (int) ((Math.random() * (height - 2)) + 1);
+		for (int i = 0; i < this.wall.length; i++) {
+			if (wall[i] != null) {
+				while (snake.collidesWith(x, y) == true
+						&& (wall[i].getPosition().getX() == x && wall[i].getPosition().getY() == y)) {
+					x = (int) ((Math.random() * (width - 2)) + 1);
+					y = (int) ((Math.random() * (height - 2)) + 1);
+				}
 			}
 		}
+		apple = new Apple(x, y);
 	}
 
+	public static void main(String[] args) {
+		SnakeGame one = new SnakeGame();
+		one.start();
+	}
 }

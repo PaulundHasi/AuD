@@ -2,12 +2,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Snake {
-	private Point[] points = null;
-	private Color color = Color.blue;
-	private Direction nextDirection = Direction.UP;
-	private Direction lastDirection;
 
-	public Snake(int length, int x, int y) {
+	private Direction nextDirection = Direction.UP;
+	private Color color = Color.blue;
+	private Direction lastDirection;
+	private Point[] points = null;
+
+	public enum Direction {
+		RIGHT, DOWN, LEFT, UP
+	}
+
+	public Snake(int x, int y, int length) {
 		if (length < 0) {
 			throw new IllegalArgumentException("length muss eine positive Zahl sein");
 		} else {
@@ -18,23 +23,11 @@ public class Snake {
 	}
 
 	public Snake(int x, int y) {
-		this(5, x, y);
+		this(x, y, 5);
 	}
 
-	public void paint(Graphics g) {
-		g.setColor(color);
-		for (int i = 0; i < points.length; i++) {
-			if (points[i] == null) {
-				continue;
-			} else {
-				g.fillRect((points[i].getX()) * SnakeGame.SQUARE_SIZE, points[i].getY() * SnakeGame.SQUARE_SIZE,
-						SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
-			}
-		}
-	}
-
-	public enum Direction {
-		RIGHT, DOWN, LEFT, UP
+	public Direction getnextDirection() {
+		return nextDirection;
 	}
 
 	public void setnextDirection(Direction direction) {
@@ -46,10 +39,6 @@ public class Snake {
 		} else {
 			this.nextDirection = direction;
 		}
-	}
-
-	public Direction getnextDirection() {
-		return nextDirection;
 	}
 
 	public void step() {
@@ -75,21 +64,41 @@ public class Snake {
 		}
 	}
 
+	public void grow(int amount) {
+		if (amount < 1) {
+			throw new IllegalArgumentException("amount muss eine positive Zahl sein");
+		} else {
+			Point[] help = new Point[points.length + amount];
+			System.arraycopy(points, 0, help, 0, points.length);
+			points = help;
+		}
+	}
+
 	public boolean collidesWith(GameItem item) {
 		return collidesWith(item.getPosition().getX(), item.getPosition().getY());
 	}
 
 	public boolean collidesWith(int x, int y) {
+		boolean b = false;
 		if (points[0].getX() == x && points[0].getY() == y) {
-			return true;
+			b = true;
 		} else {
-			return false;
+			for (int i = 1; i < points.length; i++) {
+				if (points[i] != null) {
+					if (points[i].getX() == x && points[i].getY() == y) {
+						b = true;
+					} else {
+						b = false;
+					}
+				}
+			}
 		}
+		return b;
 	}
 
 	public boolean collidesWithSelf() {
 		boolean help = false;
-		for (int i = 0; i < points.length; i++) {
+		for (int i = 1; i < points.length; i++) {
 			if (points[i] != null) {
 				if (points[0].getX() == points[i].getX() && points[0].getY() == points[i].getY()) {
 					help = true;
@@ -105,14 +114,15 @@ public class Snake {
 		return help;
 	}
 
-	public void grow(int amount) {
-		if (amount < 1) {
-			throw new IllegalArgumentException("amount muss eine positive Zahl sein");
-		} else {
-			Point[] help = new Point[points.length + amount];
-			System.arraycopy(points, 0, help, 0, points.length);
-			amount++;
+	public void paint(Graphics g) {
+		g.setColor(color);
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] == null) {
+				continue;
+			} else {
+				g.fillRect((points[i].getX()) * SnakeGame.SQUARE_SIZE, points[i].getY() * SnakeGame.SQUARE_SIZE,
+						SnakeGame.SQUARE_SIZE, SnakeGame.SQUARE_SIZE);
+			}
 		}
 	}
-
 }
