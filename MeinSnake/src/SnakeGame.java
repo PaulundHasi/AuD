@@ -10,7 +10,7 @@ public class SnakeGame extends AudGameWindow {
 	public static final int SQUARE_SIZE = 16;
 	private int score = 0;
 	private Snake snake;
-	public static final int STEP_TIME = 100;
+	public static final int STEP_TIME = 150;
 	private long lastSnakeUpdate;
 	private Brick[] wall;
 	public SnakeGame game;
@@ -95,7 +95,7 @@ public class SnakeGame extends AudGameWindow {
 				javax.swing.JOptionPane.showMessageDialog(this, "You died! Score: " + score);
 				break;
 			} else if (snake.collidesWith(this.apple) == true) {
-				snake.grow(5);
+				snake.grow(GROW_AMOUNT);
 				createNewApple();
 				this.score += this.apple.getValue();
 				setTitle("AuD-Snake - Score: " + score);
@@ -105,23 +105,19 @@ public class SnakeGame extends AudGameWindow {
 	}
 
 	private void createNewApple() {
-		int x = (int) (Math.random() * width);
-		int y = (int) (Math.random() * height);
-		this.apple = new Apple(x, y);
+		int x = (int) ((Math.random() * (width - 2))+1);
+		int y = (int) ((Math.random() * (height - 2))+1);
 		for (int i = 0; i < this.wall.length; i++) {
 			if (wall[i] != null) {
-				if (snake.collidesWith(this.apple) == true
+				while (snake.collidesWith(x, y) == true
 						&& (wall[i].getPosition().getX() == x && wall[i].getPosition().getY() == y)) {
-					while (snake.collidesWith(this.apple) == true && snake.collidesWith(wall[i]) == true
-							&& (wall[i].getPosition().getX() == x && wall[i].getPosition().getY() == y)) {
-						x = (int) (Math.random() * width);
-						y = (int) (Math.random() * height);
-						this.apple = new Apple(x, y);
-					}
+					x = (int) ((Math.random() * (width - 2))+1);
+					y = (int) ((Math.random() * (height - 2))+1);
 
 				}
 			}
 		}
+		this.apple = new Apple(x, y);
 	}
 
 }
