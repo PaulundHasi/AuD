@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 public class SnakeGame extends AudGameWindow {
 
 	public static final int SQUARE_SIZE = 16;
-	public static final int STEP_TIME = 130;
-	public static final int GROW_AMOUNT = 1;
+	public static final int STEP_TIME = 100;
+	public static final int GROW_AMOUNT = 5;
 	private int width;
 	private int height;
 	private long lastSnakeUpdate;
