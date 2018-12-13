@@ -101,8 +101,7 @@ public class SnakeGame extends AudGameWindow {
 		int y = (int) ((Math.random() * (height - 2)) + 1);
 		for (int i = 0; i < this.wall.length; i++) {
 			if (wall[i] != null) {
-				while (snake.collidesWith(x, y) == true
-						&& (wall[i].getPosition().getX() == x && wall[i].getPosition().getY() == y)) {
+				while (snake.collidesWith(x, y) == true) {
 					x = (int) ((Math.random() * (width - 2)) + 1);
 					y = (int) ((Math.random() * (height - 2)) + 1);
 				}
